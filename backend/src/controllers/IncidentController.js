@@ -11,7 +11,7 @@ module.exports = {
             .join('ong', 'ong.id', '=', 'incident.ong_id')
             .limit(5)
             .offset((page - 1) * 5)
-            .select(['incidents.*', 
+            .select(['incident.*', 
                 'ong.name', 
                 'ong.email', 
                 'ong.whatsapp', 
@@ -39,7 +39,7 @@ module.exports = {
 
         const {id} = request.params;
         const ong_id = request.headers.authorization;
-        const incident = connection('incident')
+        const incident = await connection('incident')
             .where('id', id)
             .select('ong_id')
             .first();
